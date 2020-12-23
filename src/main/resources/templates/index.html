@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Página Inicial | Java Para Não Javeiros</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+
+    <style>
+    * {
+      font-family: 'Lato', sans-serif;
+    }
+
+    body {
+      background-color: #FAFAFA;
+      margin: 0;
+      padding: 0 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    body section {
+        width: 100%;
+    }
+
+    @media screen and (min-width: 599px) and (max-width: 1279px) {
+        body section {
+            width: 80%;
+        }
+    }
+    @media screen and (min-width: 1280px) {
+        body section {
+            width: 60%;
+        }
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .btn {
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all .1s ease-in-out;
+
+    }
+
+    .btn:hover {
+      filter: brightness(0.9);
+    }
+
+    .editar-btn {
+      margin: 0 8px;
+      color: #ffc107;
+      border: 1px solid #ffc107;
+    }
+
+    .editar-btn:hover {
+      background-color: #ffc107;
+      color: #000;
+    }
+
+    .pesquisar-btn {
+      margin: 0 8px;
+      color: #007bff;
+      border: 1px solid #007bff;
+      background: #FFF;
+      outline: none;
+    }
+
+    .pesquisar-btn:hover {
+      background-color: #007bff;
+      color: #FFF;
+      cursor: pointer;
+    }
+
+    .deletar-btn {
+      margin: 0 8px;
+      color: #dc3545;
+      border: 1px solid #dc3545;
+      background: #FFF;
+    }
+
+    .deletar-btn:hover {
+      background-color: #dc3545;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .novo-cliente-btn {
+      background: #F49E4C;
+      color: #000;
+    }
+
+    section {
+      margin-top: 24px;
+    }
+
+    .novo-cliente-container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    table {
+      width: 100%;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 7px 0px;
+      border-radius: 8px;
+    }
+
+    table th {
+      vertical-align: bottom;
+      border-bottom: 2px solid #dee2e6;
+      padding: 12px 4px;
+    }
+
+    table td {
+      padding: .75rem;
+      vertical-align: top;
+      border-top: 1px solid #dee2e6;
+    }
+
+    .pesquisar-input{
+        padding: 8px 16px;
+        border-radius: 8px;
+        outline: none;
+        border: 1px solid rgba(0,0,0, 0.2);
+        min-width: 350px;
+        transition: all .2s ease-in-out
+    }
+
+    .pesquisar-input:focus{
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+
+    </style>
+
+</head>
+
+<body>
+
+    <section>
+        <div>
+            <h1 class="text-center">Clientes Cadastrados</h1>
+        </div>
+        <div class="novo-cliente-container">
+            <form action="#" th:action="@{/}" method="get">
+                <input type="text" id="nome" name="nome" th:value="${nome}" placeholder="Pesquisar por nome" class="pesquisar-input"/>
+                <input type="submit" class="btn pesquisar-btn" value="Pesquisar" />
+            </form>
+            <a href="/clientes/novo-cliente" class="btn novo-cliente-btn">Novo Cliente</a>
+        </div>
+    </section>
+
+    <section>
+        <table>
+            <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Cargo</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cliente: ${clientes}">
+                <td th:text="${cliente.nome}"></td>
+                <td th:text="${cliente.cargo}" class="text-center"></td>
+                <td class="text-center">
+                    <a th:href="@{/clientes/editar/{id}(id=${cliente.id})}" class="btn editar-btn">Editar</a>
+                    <button th:data-id="${cliente.id}" th:onclick="excluirPeloId(this.getAttribute('data-id'))" class="btn deletar-btn">Deletar</button>
+                </td>
+            </tr>
+            <tr th:if="${clientes.empty}">
+                <td colspan="3" >Nenhum cliente foi encontrado</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <script>
+        function excluirPeloId(id){
+            fetch('http://localhost:8080/clientes/' + id, {
+              method: 'DELETE'
+            })
+            .then(res => {
+                console.log(res);
+                document.location.href = "/";
+            })
+        }
+    </script>
+
+</body>
+
+</html>
