@@ -20,6 +20,8 @@ import java.util.Optional;
 public class ClientesServiceImpl implements ClientesService {
 
     private static final String CLIENTES_URI = "/clientes";
+    private static final String AUTHORIZATION_TOKEN = "gS(zEF5nqL!DJuc=";
+    private static final String AUTHORIZATION_HEADER = "Authorization";
 
     @Autowired
     private WebTarget webTarget;
@@ -31,6 +33,7 @@ public class ClientesServiceImpl implements ClientesService {
     public Optional<DetalhesClienteDTO> inserir(ClienteDTO clienteDTO) throws ErroApiException {
         Response response = webTarget.path(CLIENTES_URI)
                 .request(MediaType.APPLICATION_JSON)
+                .header(AUTHORIZATION_HEADER, AUTHORIZATION_TOKEN)
                 .post(Entity.entity(parseHelper.write(clienteDTO), MediaType.APPLICATION_JSON_TYPE));
 
         return Optional.ofNullable(parseHelper.read(response, DetalhesClienteDTO.class));
@@ -40,6 +43,7 @@ public class ClientesServiceImpl implements ClientesService {
         Response response = webTarget.path(CLIENTES_URI)
                 .path(clienteDTO.getId())
                 .request(MediaType.APPLICATION_JSON)
+                .header(AUTHORIZATION_HEADER, AUTHORIZATION_TOKEN)
                 .put(Entity.entity(parseHelper.write(clienteDTO), MediaType.APPLICATION_JSON_TYPE));
 
         return Optional.ofNullable(parseHelper.read(response, DetalhesClienteDTO.class));
@@ -50,6 +54,7 @@ public class ClientesServiceImpl implements ClientesService {
         Response response = webTarget.path(CLIENTES_URI)
                 .path(id)
                 .request(MediaType.APPLICATION_JSON)
+                .header(AUTHORIZATION_HEADER, AUTHORIZATION_TOKEN)
                 .get();
 
         return Optional.ofNullable(parseHelper.read(response, DetalhesClienteDTO.class));
@@ -59,6 +64,7 @@ public class ClientesServiceImpl implements ClientesService {
     public List<ClienteDTO> findAll() throws ErroApiException {
         Response response = webTarget.path(CLIENTES_URI)
                 .request(MediaType.APPLICATION_JSON)
+                .header(AUTHORIZATION_HEADER, AUTHORIZATION_TOKEN)
                 .get();
 
         return Arrays.asList(parseHelper.read(response, ClienteDTO[].class));
@@ -73,6 +79,7 @@ public class ClientesServiceImpl implements ClientesService {
                 .queryParam("page", pagina)
                 .queryParam("limit", limite)
                 .request(MediaType.APPLICATION_JSON)
+                .header(AUTHORIZATION_HEADER, AUTHORIZATION_TOKEN)
                 .get();
 
         return Arrays.asList(parseHelper.read(response, ClienteDTO[].class));
@@ -83,6 +90,7 @@ public class ClientesServiceImpl implements ClientesService {
         Response response = webTarget.path(CLIENTES_URI)
                 .path(id)
                 .request(MediaType.APPLICATION_JSON)
+                .header(AUTHORIZATION_HEADER, AUTHORIZATION_TOKEN)
                 .delete();
 
         if (!parseHelper.isSucesso(response)) {
