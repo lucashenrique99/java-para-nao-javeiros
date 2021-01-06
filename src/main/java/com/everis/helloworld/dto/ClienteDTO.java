@@ -12,5 +12,6 @@ public class ClienteDTO {
     private String id;
     private String nome;
     private String cargo;
+    private Boolean ativo;
 
 }

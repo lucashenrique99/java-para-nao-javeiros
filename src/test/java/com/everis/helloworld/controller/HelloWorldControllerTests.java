@@ -166,6 +166,7 @@ public class HelloWorldControllerTests {
         request.setId("1");
         request.setNome("Cliente");
         request.setCargo("Cargo");
+        request.setAtivo(Boolean.TRUE);
 
         return request;
     }
@@ -191,6 +192,7 @@ public class HelloWorldControllerTests {
                 .id("1")
                 .nome("Cliente")
                 .cargo("Cargo")
+                .ativo(Boolean.TRUE)
                 .contas(Collections.singletonList(
                         ContaViewModel.builder()
                                 .numeroConta("0018123456-7")

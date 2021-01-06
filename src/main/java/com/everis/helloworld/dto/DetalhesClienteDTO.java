@@ -14,6 +14,7 @@ public class DetalhesClienteDTO {
     private String id;
     private String nome;
     private String cargo;
+    private Boolean ativo;
     private List<ContaDTO> contas;
 
 }

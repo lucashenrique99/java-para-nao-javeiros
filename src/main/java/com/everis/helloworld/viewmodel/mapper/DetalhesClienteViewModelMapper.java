@@ -16,6 +16,7 @@ public class DetalhesClienteViewModelMapper {
                 .id(dto.getId())
                 .nome(dto.getNome())
                 .cargo(dto.getCargo())
+                .ativo(dto.getAtivo())
                 .contas(dto.getContas().stream()
                         .map(conta -> ContaViewModel.builder()
                                 .numeroConta(conta.getAgencia()

@@ -121,6 +121,7 @@ public class ClientesHelperTests {
                 .id("1")
                 .nome("Cliente")
                 .cargo("Cargo")
+                .ativo(Boolean.TRUE)
                 .build());
         return clientes;
     }
@@ -130,6 +131,7 @@ public class ClientesHelperTests {
                 .id("1")
                 .nome("Cliente")
                 .cargo("Cargo")
+                .ativo(Boolean.TRUE)
                 .contas(Collections.singletonList(getContaDTO()))
                 .build();
     }
@@ -151,6 +153,7 @@ public class ClientesHelperTests {
         request.setId("1");
         request.setNome("Cliente");
         request.setCargo("Cargo");
+        request.setAtivo(Boolean.FALSE);
 
         return request;
     }
