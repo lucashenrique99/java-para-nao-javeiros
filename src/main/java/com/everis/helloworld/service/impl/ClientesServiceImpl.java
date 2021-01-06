@@ -1,10 +1,10 @@
 package com.everis.helloworld.service.impl;
 
-import com.everis.helloworld.utils.ResponseUtilHelper;
 import com.everis.helloworld.dto.ClienteDTO;
 import com.everis.helloworld.dto.DetalhesClienteDTO;
 import com.everis.helloworld.exception.ErroApiException;
 import com.everis.helloworld.service.ClientesService;
+import com.everis.helloworld.utils.ResponseUtilHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +38,7 @@ public class ClientesServiceImpl implements ClientesService {
 
         return Optional.ofNullable(parseHelper.read(response, DetalhesClienteDTO.class));
     }
+
     @Override
     public Optional<DetalhesClienteDTO> editar(ClienteDTO clienteDTO) throws ErroApiException {
         Response response = webTarget.path(CLIENTES_URI)
@@ -94,6 +95,7 @@ public class ClientesServiceImpl implements ClientesService {
                 .delete();
 
         if (!parseHelper.isSucesso(response)) {
+            response.close();
             throw new ErroApiException("Erro durante a requisição. HTTP " + response.getStatus());
         }
 
