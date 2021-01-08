@@ -2,7 +2,7 @@
 
 ### Objetivos
 
-Este projeto tem como objetivo ilustrar um projeto real, focando nos conceitos, fluxo de informação, abordando os principais conceitos. O projeto foi construído ilustrando um recurso de cliente, o qual possui uma lista de contas.
+Este projeto tem como objetivo ilustrar um projeto real desenvolvido utilizando JAVA, Spring MVC e Thymeleaf abordando os principais conceitos de forma didática para treinamentos. O projeto foi construído ilustrando um recurso de cliente, o qual possui uma lista de contas.
 
 ### Escopo
 
@@ -84,12 +84,12 @@ Vá até o navegador e digite [http://localhost:8080](http://localhost:8080) e v
 
 ### Fluxo da informação:
 
-1. controller recebe requisição e encaminha pro helper
-2. helper encaminha os parametros recebidos do controller (caso existam)
-   2.1. Caso existam, o mapper converte os dados em DTOs de acordo com o contrato da API externa e devolve para o helper
-3. helper chama o servico associado
-4. servico realiza a requisição utilizando os parametros recebidos, recebe o retorno, desserializa e encaminha para o helper
-5. helper por sua vez, recebe o retorno em DTO e encaminha para os mappers
-6. mappers transformam o retorno em objetos viewModel para retorno dentro do domínio
-7. helper retorna os dados processados pelo mapper para o controller
-8. o controller responde a requisição passando viewModels em um objeto Model ou ModelAndView (objetos spring), e redirecionando para a JSP correta
+1. **Controller** recebe requisição e encaminha pro **helper**;
+2. **Helper** encaminha os parametros recebidos do **controller** para o **mapper**, caso existam;
+    * O **mapper** converte os dados em **DTOs** de acordo com o contrato da API externa e devolve para o **helper**;
+3. **Helper** chama o **service** associado, enviando os respectivos **DTOs** quando houverem parâmetros;
+4. **Service** realiza a requisição utilizando os parametros recebidos, obtém o retorno, desserializa e encaminha para o **helper**;
+5. **Helper** por sua vez, recebe o retorno em **DTO** e encaminha para os **mappers**;
+6. **Mappers** transformam o retorno em objetos **viewModel** para retorno dentro do domínio da aplicação;
+7. **Helper** retorna os dados processados pelo **mapper** para o **controller**;
+8. **Controller** responde a requisição passando **viewModels** em um objeto Model ou ModelAndView (objetos do Framework Spring), e redirecionando para a JSP correta;
