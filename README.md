@@ -13,7 +13,7 @@ Este projeto tem como objetivo ilustrar um projeto real, focando nos conceitos, 
 
 ### Requisitos
 
-- JDK 8
+- JDK 8+
 - Maven
 - [Mock API](https://mockapi.io/)
 
@@ -28,7 +28,15 @@ Pronto, é só isso. O seu projeto já irá realizar requisições para a sua co
 
 Modelagem dos recursos na plataforma
 
-.... colocar print aqui
+**Relação entre os recursos**
+![Modelagem](imagens/modelagem.png "Modelagem")
+
+**Recurso Clientes**
+![Modelagem do recurso de clientes](imagens/modelagem_clientes.png "Modelagem do recurso de clientes")
+
+**Recurso Contas**
+![Modelagem do recurso de contas](imagens/modelagem_contas.png "Modelagem do recurso de contas")
+
 
 ### Branchs
 
@@ -67,18 +75,6 @@ Vá até o navegador e digite [http://localhost:8080](http://localhost:8080) e v
 - **ViewModel**: na prática, possuem uma responsabilidade similar aos DTOs (trafegar dados entre as camadas), entretanto, é utilizado dentro do domínio da aplicação. São utilizadas para enviar dados para as JSPs.
 - **Utils**: classes utilitárias diversas. Normalmente são compostas de funções utilitárias como formatações de campos, por exemplo.
 - **Exception**: classes para representação de exceções
-
-|  Pacote | Conceitos  |
-|---|---|
-|  **config** |  classes de configurações |
-| **controller**  |  gerenciam requisições http |
-| **helper**  |  recebem os dados vindos das requisições, chamam os servicos responsáveis por processar, recebem o resultado do processamento e então encaminham para os mappers modelarem para o retorno esperado, encaminhando para as controllers |
-| **service** | classes de servicos onde realizam as chamadas as APIs externas, serializando e desserializando os retornos |
-| **mappers** | são responsáveis em converter os objetos do domínio da aplicação em objetos de acordo com o contrato das APIs externas. E vice versa também. |
-| **DTOs (Data transfer objects)** | são comumente utilizados para representar os contratos de APIs externas. Servem apenas para trafegar dados. |
-| **ViewModel** | na prática, possuem uma responsabilidade similar aos DTOs (trafegar dados entre as camadas), entretanto, é utilizado dentro do domínio da aplicação. São utilizadas para enviar dados para as JSPs. |
-| **Utils** | classes utilitárias diversas. Normalmente são compostas de funções utilitárias como formatações de campos, por exemplo. |
-| **Exception** |classes para representação de exceções |
 
 ### Fluxo da informação:
 
