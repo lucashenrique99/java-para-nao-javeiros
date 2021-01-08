@@ -26,16 +26,22 @@ Será utilizada neste projeto apenas para simular um servico externo. Para execu
 
 Pronto, é só isso. O seu projeto já irá realizar requisições para a sua conta.
 
-Modelagem dos recursos na plataforma
+###### Modelagem dos recursos na plataforma
+
 
 **Relação entre os recursos**
-![Modelagem](imagens/modelagem.png "Modelagem")
+
+![Modelagem](imagens/modelagem.png)
+
 
 **Recurso Clientes**
-![Modelagem do recurso de clientes](imagens/modelagem_clientes.png "Modelagem do recurso de clientes")
+
+![Modelagem do recurso de clientes](imagens/modelagem_clientes.png)
+
 
 **Recurso Contas**
-![Modelagem do recurso de contas](imagens/modelagem_contas.png "Modelagem do recurso de contas")
+
+![Modelagem do recurso de contas](imagens/modelagem_contas.png)
 
 
 ### Branchs
