@@ -14,7 +14,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ClientesServiceImpl implements ClientesService {
@@ -30,35 +29,35 @@ public class ClientesServiceImpl implements ClientesService {
     private ResponseUtilHelper parseHelper;
 
     @Override
-    public Optional<DetalhesClienteDTO> inserir(ClienteDTO clienteDTO) throws ErroApiException {
+    public DetalhesClienteDTO inserir(ClienteDTO clienteDTO) throws ErroApiException {
         Response response = webTarget.path(CLIENTES_URI)
                 .request(MediaType.APPLICATION_JSON)
                 .header(AUTHORIZATION_HEADER, AUTHORIZATION_TOKEN)
                 .post(Entity.entity(parseHelper.write(clienteDTO), MediaType.APPLICATION_JSON_TYPE));
 
-        return Optional.ofNullable(parseHelper.read(response, DetalhesClienteDTO.class));
+        return parseHelper.read(response, DetalhesClienteDTO.class);
     }
 
     @Override
-    public Optional<DetalhesClienteDTO> editar(ClienteDTO clienteDTO) throws ErroApiException {
+    public DetalhesClienteDTO editar(ClienteDTO clienteDTO) throws ErroApiException {
         Response response = webTarget.path(CLIENTES_URI)
                 .path(clienteDTO.getId())
                 .request(MediaType.APPLICATION_JSON)
                 .header(AUTHORIZATION_HEADER, AUTHORIZATION_TOKEN)
                 .put(Entity.entity(parseHelper.write(clienteDTO), MediaType.APPLICATION_JSON_TYPE));
 
-        return Optional.ofNullable(parseHelper.read(response, DetalhesClienteDTO.class));
+        return parseHelper.read(response, DetalhesClienteDTO.class);
     }
 
     @Override
-    public Optional<DetalhesClienteDTO> findById(String id) throws ErroApiException {
+    public DetalhesClienteDTO findById(String id) throws ErroApiException {
         Response response = webTarget.path(CLIENTES_URI)
                 .path(id)
                 .request(MediaType.APPLICATION_JSON)
                 .header(AUTHORIZATION_HEADER, AUTHORIZATION_TOKEN)
                 .get();
 
-        return Optional.ofNullable(parseHelper.read(response, DetalhesClienteDTO.class));
+        return parseHelper.read(response, DetalhesClienteDTO.class);
     }
 
     @Override

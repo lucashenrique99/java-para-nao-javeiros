@@ -1,9 +1,9 @@
 package com.everis.helloworld.service.impl;
 
-import com.everis.helloworld.utils.ResponseUtilHelper;
 import com.everis.helloworld.dto.ContaDTO;
 import com.everis.helloworld.exception.ErroApiException;
 import com.everis.helloworld.service.ContasService;
+import com.everis.helloworld.utils.ResponseUtilHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ContasServiceImpl implements ContasService {
@@ -27,14 +26,14 @@ public class ContasServiceImpl implements ContasService {
     private ResponseUtilHelper parseHelper;
 
     @Override
-    public Optional<ContaDTO> inserir(String clienteId) throws ErroApiException {
+    public ContaDTO inserir(String clienteId) throws ErroApiException {
         Response response = webTarget.path(CLIENTES_URI)
                 .path(clienteId)
                 .path(CONTAS_URI)
                 .request(MediaType.APPLICATION_JSON)
                 .method("POST");
 
-        return Optional.ofNullable(parseHelper.read(response, ContaDTO.class));
+        return parseHelper.read(response, ContaDTO.class);
     }
 
     @Override

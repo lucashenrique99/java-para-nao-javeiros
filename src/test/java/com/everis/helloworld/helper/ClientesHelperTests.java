@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 
@@ -72,8 +71,8 @@ public class ClientesHelperTests {
 
     @Test
     public void inserirTests() throws Exception {
-        Mockito.when(clientesService.inserir(any())).thenReturn(Optional.of(getCliente()));
-        Mockito.when(contasService.inserir(any())).thenReturn(Optional.of(getContaDTO()));
+        Mockito.when(clientesService.inserir(any())).thenReturn(getCliente());
+        Mockito.when(contasService.inserir(any())).thenReturn(getContaDTO());
 
         ClienteViewModel cliente = helper.inserir(getNovoClienteRequest());
 
@@ -83,7 +82,7 @@ public class ClientesHelperTests {
 
     @Test
     public void findByIdTests() throws Exception {
-        Mockito.when(clientesService.findById(any())).thenReturn(Optional.of(getCliente()));
+        Mockito.when(clientesService.findById(any())).thenReturn(getCliente());
 
         DetalhesClienteViewModel cliente = helper.findById("1");
 
@@ -94,7 +93,7 @@ public class ClientesHelperTests {
 
     @Test
     public void editarTests() throws Exception {
-        Mockito.when(clientesService.editar(any())).thenReturn(Optional.of(getCliente()));
+        Mockito.when(clientesService.editar(any())).thenReturn(getCliente());
 
         ClienteViewModel cliente = helper.editar(getEditarClienteRequest());
 

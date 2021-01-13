@@ -1,9 +1,6 @@
 package com.everis.helloworld.helper;
 
-import com.everis.helloworld.dto.ClienteDTO;
-import com.everis.helloworld.dto.DetalhesClienteDTO;
-import com.everis.helloworld.dto.EditarClienteRequestDTO;
-import com.everis.helloworld.dto.NovoClienteRequestDTO;
+import com.everis.helloworld.dto.*;
 import com.everis.helloworld.dto.mapper.ClientesDTOMapper;
 import com.everis.helloworld.exception.ErroApiException;
 import com.everis.helloworld.service.ClientesService;
@@ -16,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class ClientesHelper {
@@ -38,32 +34,35 @@ public class ClientesHelper {
     }
 
     public ClienteViewModel inserir(NovoClienteRequestDTO novoClienteRequestDTO) throws ErroApiException {
-        Optional<DetalhesClienteDTO> dto = clientesService.inserir(ClientesDTOMapper.from(novoClienteRequestDTO));
-        if (!dto.isPresent()) {
+        DetalhesClienteDTO clienteDTO = clientesService.inserir(ClientesDTOMapper.from(novoClienteRequestDTO));
+        if (clienteDTO == null) {
             throw new ErroApiException("Não foi possível salvar o cliente");
         }
-        contasService.inserir(dto.get().getId())
-                .orElseThrow(() -> new ErroApiException("Não foi possível criar uma conta para o cliente"));
 
-        return ClienteViewModelMapper.from(dto.get());
+        ContaDTO contaDTO = contasService.inserir(clienteDTO.getId());
+        if (contaDTO == null) {
+            throw new ErroApiException("Não foi possível criar uma conta para o cliente");
+        }
+
+        return ClienteViewModelMapper.from(clienteDTO);
     }
 
     public ClienteViewModel editar(EditarClienteRequestDTO editarClienteRequestDTO) throws ErroApiException {
-        Optional<DetalhesClienteDTO> dto = clientesService.editar(ClientesDTOMapper.from(editarClienteRequestDTO));
-        if (!dto.isPresent()) {
+        DetalhesClienteDTO dto = clientesService.editar(ClientesDTOMapper.from(editarClienteRequestDTO));
+        if (dto == null) {
             throw new ErroApiException("Não foi possível salvar o cliente");
         }
 
-        return ClienteViewModelMapper.from(dto.get());
+        return ClienteViewModelMapper.from(dto);
     }
 
     public DetalhesClienteViewModel findById(String id) throws ErroApiException {
-        Optional<DetalhesClienteDTO> dto = clientesService.findById(id);
-        if (!dto.isPresent()) {
+        DetalhesClienteDTO dto = clientesService.findById(id);
+        if (dto == null) {
             throw new ErroApiException("Cliente não encontrado");
         }
 
-        return DetalhesClienteViewModelMapper.from(dto.get());
+        return DetalhesClienteViewModelMapper.from(dto);
     }
 
     public void excluirPeloId(String id) throws ErroApiException {
