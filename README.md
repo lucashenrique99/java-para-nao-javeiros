@@ -103,6 +103,7 @@ A nomeclatura das classes (bem como os pacotes onde se encontram cada uma) segue
 7. **Helper** retorna os dados processados pelo **mapper** para o **controller**;
 8. **Controller** responde a requisição passando **viewModels** em um objeto Model ou ModelAndView (objetos do Framework Spring), e redirecionando para a JSP correta;
 
+![Exemplo do fluxo da informação](imagens/fluxo_informacao.png)
 
 ### Testes Unitátios
 Este projeto também contempla o tema de testes unitários. Estes se encontram no diretório **src/test/java/com/everis/helloworld** deste repositório. Cada classe de teste unitário refere-se a uma classe da aplicação, verificando os métodos, retornos esperados, etc.
