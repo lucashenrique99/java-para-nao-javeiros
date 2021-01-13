@@ -65,8 +65,4 @@ public class ClientesHelper {
         return DetalhesClienteViewModelMapper.from(dto);
     }
 
-    public void excluirPeloId(String id) throws ErroApiException {
-        clientesService.excluirPeloId(id);
-    }
-
 }

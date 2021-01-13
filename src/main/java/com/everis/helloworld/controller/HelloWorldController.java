@@ -5,13 +5,9 @@ import com.everis.helloworld.dto.NovoClienteRequestDTO;
 import com.everis.helloworld.exception.ErroApiException;
 import com.everis.helloworld.helper.ClientesHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Collections;
 
 @Controller
 public class HelloWorldController {
@@ -95,22 +91,6 @@ public class HelloWorldController {
             e.printStackTrace();
             model.addAttribute("erro", e.getMessage());
             return "erro";
-        }
-    }
-
-    @DeleteMapping("/clientes/{id}")
-    @ResponseBody
-    public ResponseEntity<Object> excluirPeloId(@PathVariable String id) {
-        try {
-            helper.excluirPeloId(id);
-
-            return ResponseEntity.noContent().build();
-
-        } catch (ErroApiException e) {
-            e.printStackTrace();
-
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(Collections.singletonMap("erro", e.getMessage()));
         }
     }
 

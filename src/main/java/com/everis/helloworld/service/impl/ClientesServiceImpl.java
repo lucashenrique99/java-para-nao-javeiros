@@ -85,19 +85,4 @@ public class ClientesServiceImpl implements ClientesService {
         return Arrays.asList(parseHelper.read(response, ClienteDTO[].class));
     }
 
-    @Override
-    public void excluirPeloId(String id) throws ErroApiException {
-        Response response = webTarget.path(CLIENTES_URI)
-                .path(id)
-                .request(MediaType.APPLICATION_JSON)
-                .header(AUTHORIZATION_HEADER, AUTHORIZATION_TOKEN)
-                .delete();
-
-        if (!parseHelper.isSucesso(response)) {
-            response.close();
-            throw new ErroApiException("Erro durante a requisição. HTTP " + response.getStatus());
-        }
-
-        response.close();
-    }
 }

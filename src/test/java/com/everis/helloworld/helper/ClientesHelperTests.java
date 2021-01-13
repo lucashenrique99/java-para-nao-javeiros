@@ -101,26 +101,12 @@ public class ClientesHelperTests {
         Assert.assertEquals(cliente.getNome(), "Cliente");
     }
 
-    @Test
-    public void excluirPeloIdTests() throws Exception {
-        Mockito.doNothing().when(clientesService).excluirPeloId(any());
-        helper.excluirPeloId("1");
-    }
-
-    @Test(expected = ErroApiException.class)
-    public void excluirPeloIdComErroTests() throws Exception {
-        String mensagemErro = "Não foi possível excluir este cliente";
-        Mockito.doThrow(new ErroApiException(mensagemErro)).when(clientesService).excluirPeloId(any());
-        helper.excluirPeloId("1");
-    }
-
     private List<ClienteDTO> getClientes() {
         List<ClienteDTO> clientes = new ArrayList<>();
         clientes.add(ClienteDTO.builder()
                 .id("1")
                 .nome("Cliente")
                 .cargo("Cargo")
-                .ativo(Boolean.TRUE)
                 .build());
         return clientes;
     }
@@ -130,7 +116,6 @@ public class ClientesHelperTests {
                 .id("1")
                 .nome("Cliente")
                 .cargo("Cargo")
-                .ativo(Boolean.TRUE)
                 .contas(Collections.singletonList(getContaDTO()))
                 .build();
     }
@@ -152,7 +137,6 @@ public class ClientesHelperTests {
         request.setId("1");
         request.setNome("Cliente");
         request.setCargo("Cargo");
-        request.setAtivo(Boolean.FALSE);
 
         return request;
     }

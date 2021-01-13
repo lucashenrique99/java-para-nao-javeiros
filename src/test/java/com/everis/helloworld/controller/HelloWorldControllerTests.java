@@ -13,8 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
 import java.util.ArrayList;
@@ -23,10 +21,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class HelloWorldControllerTests {
 
@@ -150,23 +145,11 @@ public class HelloWorldControllerTests {
 
     }
 
-    @Test
-    public void excluirPeloIdTest() throws Exception {
-        this.mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
-        doNothing().when(helper).excluirPeloId(any());
-
-        mockMvc.perform(delete("/clientes/{id}", "1"))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isNoContent());
-
-    }
-
     private EditarClienteRequestDTO getEditarClienteRequest() {
         EditarClienteRequestDTO request = new EditarClienteRequestDTO();
         request.setId("1");
         request.setNome("Cliente");
         request.setCargo("Cargo");
-        request.setAtivo(Boolean.TRUE);
 
         return request;
     }
@@ -192,7 +175,6 @@ public class HelloWorldControllerTests {
                 .id("1")
                 .nome("Cliente")
                 .cargo("Cargo")
-                .ativo(Boolean.TRUE)
                 .contas(Collections.singletonList(
                         ContaViewModel.builder()
                                 .numeroConta("0018123456-7")

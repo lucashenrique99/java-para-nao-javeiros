@@ -14,6 +14,5 @@ public class EditarClienteRequestDTO {
     private String id;
     private String nome;
     private String cargo;
-    private Boolean ativo;
 
 }

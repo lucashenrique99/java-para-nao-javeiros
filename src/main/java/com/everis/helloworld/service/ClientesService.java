@@ -18,6 +18,4 @@ public interface ClientesService {
 
     List<ClienteDTO> findAll(String nome, Integer pagina, Integer limite) throws ErroApiException;
 
-    void excluirPeloId(String id) throws ErroApiException;
-
 }

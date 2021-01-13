@@ -10,7 +10,6 @@ public class ClientesDTOMapper {
         return ClienteDTO.builder()
                 .nome(request.getNome())
                 .cargo(request.getCargo())
-                .ativo(Boolean.TRUE)
                 .build();
     }
 
@@ -19,7 +18,6 @@ public class ClientesDTOMapper {
                 .id(request.getId())
                 .nome(request.getNome())
                 .cargo(request.getCargo())
-                .ativo(request.getAtivo())
                 .build();
     }
 
